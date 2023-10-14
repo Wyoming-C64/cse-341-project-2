@@ -1,0 +1,468 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Railroad Roster REST API",
+    "description": "Railroad Roster REST API v1.0.0 by Mike Lewis for BYU-I CSE-341: Web Services"
+  },
+  "host": "localhost:65100",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Return API name and version number.",
+        "description": "This endpoint simply returns an object containing the name of the API, version number, and author.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the version information for the API.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Railroad Roster REST API"
+                },
+                "version": {
+                  "type": "string",
+                  "example": "1.0.0"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Mike Lewis"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roster/": {
+      "get": {
+        "summary": "Return the entire roster.",
+        "description": "Returns all roster records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All roster records are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "650f75b50809019a9a2fb6fe"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "Mike"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Lewis"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "mikelewis@email.com"
+                  },
+                  "favoriteColor": {
+                    "type": "string",
+                    "example": "Redd"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "example": "May 5"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a single roster record.",
+        "description": "Adds a record for a single piece of rolling stock using information provided in a JSON body.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "carNumber": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "aarCarType": {
+                  "type": "string",
+                  "example": "XM"
+                },
+                "carLength": {
+                  "type": "number",
+                  "example": 480
+                },
+                "carHeight": {
+                  "type": "number",
+                  "example": 186
+                },
+                "color": {
+                  "type": "string",
+                  "example": "Brown"
+                },
+                "ltWeight": {
+                  "type": "number",
+                  "example": 50000
+                },
+                "ldLimit": {
+                  "type": "number",
+                  "example": 150000
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 125000
+                },
+                "units": {
+                  "type": "string",
+                  "example": "pounds"
+                },
+                "builtMonth": {
+                  "type": "number",
+                  "example": 1
+                },
+                "builtYear": {
+                  "type": "number",
+                  "example": 1988
+                }
+              },
+              "required": [
+                "reportingMark",
+                "carNumber",
+                "aarCarType",
+                "carLength",
+                "carHeight",
+                "color",
+                "ltWeight",
+                "ldLimit",
+                "capacity",
+                "units",
+                "builtMonth",
+                "builtYear"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single roster record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/roster/{id}": {
+      "get": {
+        "summary": "Get a single roster record.",
+        "description": "Returns the roster record identified by `id` for a single piece of rolling stock.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the roster record of a rolling stock item.",
+            "format": "hexadecimal"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single rolling stock roster record identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "carNumber": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "aarCarType": {
+                  "type": "string",
+                  "example": "XM"
+                },
+                "carLength": {
+                  "type": "number",
+                  "example": 480
+                },
+                "carHeight": {
+                  "type": "number",
+                  "example": 186
+                },
+                "color": {
+                  "type": "string",
+                  "example": "Brown"
+                },
+                "ltWeight": {
+                  "type": "number",
+                  "example": 50000
+                },
+                "ldLimit": {
+                  "type": "number",
+                  "example": 150000
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 125000
+                },
+                "units": {
+                  "type": "string",
+                  "example": "pounds"
+                },
+                "builtMonth": {
+                  "type": "number",
+                  "example": 1
+                },
+                "builtYear": {
+                  "type": "number",
+                  "example": 1988
+                }
+              },
+              "required": [
+                "reportingMark",
+                "carNumber",
+                "aarCarType",
+                "carLength",
+                "carHeight",
+                "color",
+                "ltWeight",
+                "ldLimit",
+                "capacity",
+                "units",
+                "builtMonth",
+                "builtYear"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a single roster record.",
+        "description": "Updates the roster record identified by `id` using information provided in a JSON body.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the roster record of a rolling stock item.",
+            "format": "hexadecimal"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "carNumber": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "aarCarType": {
+                  "type": "string",
+                  "example": "XM"
+                },
+                "carLength": {
+                  "type": "number",
+                  "example": 480
+                },
+                "carHeight": {
+                  "type": "number",
+                  "example": 186
+                },
+                "color": {
+                  "type": "string",
+                  "example": "Brown"
+                },
+                "ltWeight": {
+                  "type": "number",
+                  "example": 50000
+                },
+                "ldLimit": {
+                  "type": "number",
+                  "example": 150000
+                },
+                "capacity": {
+                  "type": "number",
+                  "example": 125000
+                },
+                "units": {
+                  "type": "string",
+                  "example": "pounds"
+                },
+                "builtMonth": {
+                  "type": "number",
+                  "example": 1
+                },
+                "builtYear": {
+                  "type": "number",
+                  "example": 1988
+                }
+              },
+              "required": [
+                "reportingMark",
+                "carNumber",
+                "aarCarType",
+                "carLength",
+                "carHeight",
+                "color",
+                "ltWeight",
+                "ldLimit",
+                "capacity",
+                "units",
+                "builtMonth",
+                "builtYear"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The roster record for a single piece of rolling stock is updated with the new data. No data is returned other than this status."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a single roster item.",
+        "description": "Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the rolling stock roster record to be deleted.",
+            "format": "hexadecimal"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The roster record identified by `id` for a single piece of rolling stock is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    }
+  }
+}
