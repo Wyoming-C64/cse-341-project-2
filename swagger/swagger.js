@@ -7,7 +7,7 @@ const doc = {
     title: About.name,    
     description: About.name + ' v' + About.version + ' by ' + About.author +' for BYU-I CSE-341: Web Services',
   },
-  host: 'contacts-week-04.onrender.com',   
+  host: 'rr-roster.onrender.com',   
   basePath: '/',  
   schemes: ['https'],   
   consumes: ['application/json'], 
