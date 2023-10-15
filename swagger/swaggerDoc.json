@@ -78,27 +78,55 @@
                 "properties": {
                   "_id": {
                     "type": "string",
-                    "example": "650f75b50809019a9a2fb6fe"
+                    "example": "0123456789abcdef01234567"
                   },
-                  "firstName": {
+                  "reportingMark": {
                     "type": "string",
-                    "example": "Mike"
+                    "example": "TEST"
                   },
-                  "lastName": {
+                  "carNumber": {
                     "type": "string",
-                    "example": "Lewis"
+                    "example": "123456"
                   },
-                  "email": {
+                  "aarCarType": {
                     "type": "string",
-                    "example": "mikelewis@email.com"
+                    "example": "XM"
                   },
-                  "favoriteColor": {
-                    "type": "string",
-                    "example": "Redd"
+                  "carLength": {
+                    "type": "number",
+                    "example": 480
                   },
-                  "birthday": {
+                  "carHeight": {
+                    "type": "number",
+                    "example": 186
+                  },
+                  "color": {
                     "type": "string",
-                    "example": "May 5"
+                    "example": "Brown"
+                  },
+                  "ltWeight": {
+                    "type": "number",
+                    "example": 50000
+                  },
+                  "ldLimit": {
+                    "type": "number",
+                    "example": 150000
+                  },
+                  "capacity": {
+                    "type": "number",
+                    "example": 125000
+                  },
+                  "units": {
+                    "type": "string",
+                    "example": "pounds"
+                  },
+                  "builtMonth": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "builtYear": {
+                    "type": "number",
+                    "example": 1988
                   }
                 }
               },
@@ -245,6 +273,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
                 "reportingMark": {
                   "type": "string",
                   "example": "TEST"
@@ -294,20 +326,6 @@
                   "example": 1988
                 }
               },
-              "required": [
-                "reportingMark",
-                "carNumber",
-                "aarCarType",
-                "carLength",
-                "carHeight",
-                "color",
-                "ltWeight",
-                "ldLimit",
-                "capacity",
-                "units",
-                "builtMonth",
-                "builtYear"
-              ],
               "xml": {
                 "name": "main"
               }
@@ -412,7 +430,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success - The roster record for a single piece of rolling stock is updated with the new data. No data is returned other than this status."
+            "description": "Success - The roster record identified by `id` is updated with the new data. No data is returned other than this status."
           },
           "404": {
             "description": "Not found."
@@ -441,6 +459,247 @@
         "responses": {
           "200": {
             "description": "The roster record identified by `id` for a single piece of rolling stock is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/railroad/": {
+      "get": {
+        "summary": "Return the entire list of railroads.",
+        "description": "Returns all reailroad entities in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All railroad entities are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "0123456789abcdef01234567"
+                  },
+                  "reportingMark": {
+                    "type": "string",
+                    "example": "TEST"
+                  },
+                  "railroadName": {
+                    "type": "string",
+                    "example": "Test Every Single Transportation Company"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a single railroad entity.",
+        "description": "Adds a record for a single railroad entity using information provided in a JSON body.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "railroadName": {
+                  "type": "string",
+                  "example": "Test Every Single Transportation Company"
+                }
+              },
+              "required": [
+                "reportingMark",
+                "railroadName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single railroad entity is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/railroad/{id}": {
+      "get": {
+        "summary": "Get a single railroad entity.",
+        "description": "Returns the railroad entity identified by `id`.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the railroad entity.",
+            "format": "hexadecimal"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single railroad entity identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "railroadName": {
+                  "type": "string",
+                  "example": "Test Every Single Transportation Company"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a single railroad entity.",
+        "description": "Updates the railroad entity identified by `id` using information provided in a JSON body.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the railroad entity.",
+            "format": "hexadecimal"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reportingMark": {
+                  "type": "string",
+                  "example": "TEST"
+                },
+                "railroadName": {
+                  "type": "string",
+                  "example": "Test Every Single Transportation Company"
+                }
+              },
+              "required": [
+                "reportingMark",
+                "railroadName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The single railroad entity identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a single railroad entity.",
+        "description": "Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique ID for the railroad entity to be deleted.",
+            "format": "hexadecimal"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The single railroad entity identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
             "schema": {
               "type": "object",
               "properties": {

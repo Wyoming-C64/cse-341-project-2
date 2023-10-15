@@ -1,31 +1,21 @@
-// Rolling Stock Controller
+// Railroad Company (Entity) Controller
 
 const mongoDb = require('../db/connect'); // Must connect to DB if not already.
 const {ObjectId} = require('mongodb');
-const collection = 'rollingStock';
+const collection = 'railroads';
 
 /////// GET ///////
 const getAll = async (req, res, next) => {
   /*
-    #swagger.summary = 'Return the entire roster.'
-    #swagger.description = 'Returns all roster records in the collection. No filtering is applied.'
+    #swagger.summary = 'Return the entire list of railroads.'
+    #swagger.description = 'Returns all reailroad entities in the collection. No filtering is applied.'
     #swagger.responses[200] = {
-      description: "All roster records are successfully fetched and returned in an array.",
+      description: "All railroad entities are successfully fetched and returned in an array.",
       schema: [{
-          _id: "0123456789abcdef01234567",
-          reportingMark: "TEST",
-          carNumber: "123456",
-          aarCarType: "XM",
-          carLength: 480,
-          carHeight: 186,
-          color: "Brown",
-          ltWeight: 50000,
-          ldLimit: 150000,
-          capacity: 125000,
-          units: "pounds",
-          builtMonth: 1,
-          builtYear: 1988
-        }]
+        _id: "0123456789abcdef01234567",
+        reportingMark: 'TEST',
+        railroadName: 'Test Every Single Transportation Company',
+      }]
     }
     #swagger.responses[500] = {
         description: 'Internal server or database error.'
@@ -51,30 +41,20 @@ const getAll = async (req, res, next) => {
 };
 
 const getOne = async (req, res, next) => {
-  /*  #swagger.summary = 'Get a single roster record.'
-      #swagger.description = 'Returns the roster record identified by `id` for a single piece of rolling stock.'
+  /*  #swagger.summary = 'Get a single railroad entity.'
+      #swagger.description = 'Returns the railroad entity identified by `id`.'
       #swagger.parameters['id'] = {
         in: 'path',
-        description: 'A valid and unique ID for the roster record of a rolling stock item.',
+        description: 'A valid and unique ID for the railroad entity.',
         type: 'string',
         format: 'hexadecimal'
       }
       #swagger.responses[200] = {
-        description: "A single rolling stock roster record identified by `id` is successfully returned.",
+        description: "A single railroad entity identified by `id` is successfully returned.",
         schema: {
           _id: "0123456789abcdef01234567",
-          reportingMark: "TEST",
-          carNumber: "123456",
-          aarCarType: "XM",
-          carLength: 480,
-          carHeight: 186,
-          color: "Brown",
-          ltWeight: 50000,
-          ldLimit: 150000,
-          capacity: 125000,
-          units: "pounds",
-          builtMonth: 1,
-          builtYear: 1988
+          reportingMark: 'TEST',
+          railroadName: 'Test Every Single Transportation Company',
         }
       }
       #swagger.responses[404] = {
@@ -117,8 +97,8 @@ const getOne = async (req, res, next) => {
 /////// POST ///////
 const postData = async (req, res) => {
   console.log(`POST document: `);
-  /*  #swagger.summary = 'Add a single roster record.'
-      #swagger.description = 'Adds a record for a single piece of rolling stock using information provided in a JSON body.'
+  /*  #swagger.summary = 'Add a single railroad entity.'
+      #swagger.description = 'Adds a record for a single railroad entity using information provided in a JSON body.'
       #swagger.parameters['record'] = {
         in: 'body',
         description: 'A valid JSON object with required data elements populated.',
@@ -126,21 +106,11 @@ const postData = async (req, res) => {
         format: 'json',
         schema: {
           $reportingMark: "TEST",
-          $carNumber: "123456",
-          $aarCarType: "XM",
-          $carLength: 480,
-          $carHeight: 186,
-          $color: "Brown",
-          $ltWeight: 50000,
-          $ldLimit: 150000,
-          $capacity: 125000,
-          $units: "pounds",
-          $builtMonth: 1,
-          $builtYear: 1988
+          $railroadName: "Test Every Single Transportation Company",
         }
       }
       #swagger.responses[201] = {
-        description: "Created - A single roster record is added with the data given. The return result provides the newly assigned ID number.",
+        description: "Created - A single railroad entity is added with the data given. The return result provides the newly assigned ID number.",
         schema: {
           acknowledged: true,
           insertedId: '<hexadecimal string>'
@@ -156,17 +126,7 @@ const postData = async (req, res) => {
   const record = req.body;
   if ( 
     record.reportingMark && 
-    record.carNumber &&
-    record.aarCarType &&
-    record.carLength &&
-    record.carHeight &&
-    record.color &&
-    record.ltWeight &&
-    record.ldLimit &&
-    record.capacity &&
-    record.units &&
-    record.builtMonth &&
-    record.builtYear
+    record.railroadName
   ) {
     
     const dbResult = mongoDb.getDb()
@@ -197,11 +157,11 @@ const postData = async (req, res) => {
 /////// PUT ///////
 const putData = async (req, res, next) => {
   let response = {};
-  /*  #swagger.summary = 'Update a single roster record.'
-      #swagger.description = 'Updates the roster record identified by `id` using information provided in a JSON body.'
+  /*  #swagger.summary = 'Update a single railroad entity.'
+      #swagger.description = 'Updates the railroad entity identified by `id` using information provided in a JSON body.'
       #swagger.parameters['id'] = {
         in: 'path',
-        description: 'A valid and unique ID for the roster record of a rolling stock item.',
+        description: 'A valid and unique ID for the railroad entity.',
         type: 'string',
         format: 'hexadecimal',
       } 
@@ -212,21 +172,11 @@ const putData = async (req, res, next) => {
         format: 'json',
         schema: {
           $reportingMark: "TEST",
-          $carNumber: "123456",
-          $aarCarType: "XM",
-          $carLength: 480,
-          $carHeight: 186,
-          $color: "Brown",
-          $ltWeight: 50000,
-          $ldLimit: 150000,
-          $capacity: 125000,
-          $units: "pounds",
-          $builtMonth: 1,
-          $builtYear: 1988
+          $railroadName: "Test Every Single Transportation Company"
         }
       }
       #swagger.responses[204] = {
-        description: "Success - The roster record identified by `id` is updated with the new data. No data is returned other than this status.",
+        description: "Success - The single railroad entity identified by `id` is updated with the new data. No data is returned other than this status.",
       }
       #swagger.responses[404] = {
         description: "Not found.",
@@ -240,17 +190,7 @@ const putData = async (req, res, next) => {
 
   // const record = {
   //   reportingMark: req.body.reportingMark,
-  //   carNumber: req.body.carNumber,
-  //   aarCarType: req.body.aarCarType,
-  //   carLength: req.body.carLength,
-  //   carHeight: req.body.carHeight,
-  //   color: req.body.color,
-  //   ltWeight: req.body.ltWeight,
-  //   ldLimit: req.body.ldLimit,
-  //   capacity: req.body.capacity,
-  //   units: req.body.units,
-  //   builtMonth: req.body.builtMonth,
-  //   builtYear: req.body.builtYear
+  //   railroadName: req.body.railroadName
   // }
 
   console.log(`PUT document ${paddedId}:`);
@@ -283,16 +223,16 @@ const putData = async (req, res, next) => {
 
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
-  /*  #swagger.summary = 'Delete a single roster item.'
-      #swagger.description = 'Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
+  /*  #swagger.summary = 'Delete a single railroad entity.'
+      #swagger.description = 'Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
       #swagger.parameters['id'] = {
         in: 'path',
-        description: 'A valid and unique ID for the rolling stock roster record to be deleted.',
+        description: 'A valid and unique ID for the railroad entity to be deleted.',
         type: 'string',
         format: 'hexadecimal',
       } 
       #swagger.responses[200] = {
-        description: "The roster record identified by `id` for a single piece of rolling stock is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
+        description: "The single railroad entity identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
         schema: {
           acknowledged: true,
           deletedCount: 1
