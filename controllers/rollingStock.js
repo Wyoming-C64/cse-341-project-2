@@ -176,7 +176,6 @@ const postData = async (req, res) => {
 
     dbResult.then( 
       (resultData) => {
-        console.log(resultData);
         console.log(`    201 - Created. New ID = ${resultData.insertedId}`); 
         res.setHeader('Content-Type', 'application/json'); 
         res.status(201).json(resultData); 
