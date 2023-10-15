@@ -21,7 +21,7 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
-  console.log(`GET ALL: `);
+  console.log(`railroads/GET ALL: `);
   
   const result = await mongoDb.getDb()
     .db()
@@ -68,7 +68,7 @@ const getOne = async (req, res, next) => {
   const paddedId = req.params.id.padStart(24,'0');
   const myObjId = new ObjectId(paddedId);
   
-  console.log(`GET document ${paddedId}:`);
+  console.log(`railroads/GET document ${paddedId}:`);
   
   const result = await mongoDb.getDb()
     .db()
@@ -96,7 +96,7 @@ const getOne = async (req, res, next) => {
 
 /////// POST ///////
 const postData = async (req, res) => {
-  console.log(`POST document: `);
+  console.log(`railroads/POST document: `);
   /*  #swagger.summary = 'Add a single railroad entity.'
       #swagger.description = 'Adds a record for a single railroad entity using information provided in a JSON body.'
       #swagger.parameters['record'] = {
@@ -193,7 +193,7 @@ const putData = async (req, res, next) => {
   //   railroadName: req.body.railroadName
   // }
 
-  console.log(`PUT document ${paddedId}:`);
+  console.log(`railroads/PUT document ${paddedId}:`);
   const dbResult = mongoDb.getDb()
     .db()
     .collection(collection)
@@ -245,7 +245,7 @@ const deleteData = async (req, res, next) => {
   const paddedId = req.params.id.padStart(24,'0');
   const myObjId = new ObjectId(paddedId);
 
-  console.log(`DELETE document ${paddedId}:`);
+  console.log(`railroads/DELETE document ${paddedId}:`);
 
   const dbResult = mongoDb.getDb()
     .db()

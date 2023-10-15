@@ -13,7 +13,7 @@ const defaultRoute = async(req, res) => {
         } 
       }
   */
-  console.log('GET API VERSION:\n    200 - OK');
+  console.log('/GET API VERSION:\n    200 - OK');
   res.setHeader('Content-Type', 'application/json');  
   res.status(200).json(About);
 }
