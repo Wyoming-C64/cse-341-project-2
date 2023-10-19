@@ -5,10 +5,10 @@
     "title": "Railroad Roster REST API",
     "description": "Railroad Roster REST API v1.0.0 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
-  "host": "rr-roster.onrender.com",
+  "host": "localhost:65100",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -17,18 +17,11 @@
     "application/json"
   ],
   "paths": {
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/": {
       "get": {
+        "tags": [
+          "Main"
+        ],
         "summary": "Return API name and version number.",
         "description": "This endpoint simply returns an object containing the name of the API, version number, and author.",
         "produces": [
@@ -61,8 +54,25 @@
         }
       }
     },
+    "/api-docs/": {
+      "get": {
+        "tags": [
+          "API Documentation"
+        ],
+        "summary": "Provide documentation for this API.",
+        "description": "Executes the main Swagger documentation page handler.",
+        "responses": {
+          "200": {
+            "description": "A functioning web page is returned allowing the user to navigate the documentation. No JSON data is returned on this route."
+          }
+        }
+      }
+    },
     "/roster/": {
       "get": {
+        "tags": [
+          "Roster"
+        ],
         "summary": "Return the entire roster.",
         "description": "Returns all roster records in the collection. No filtering is applied.",
         "produces": [
@@ -141,6 +151,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Roster"
+        ],
         "summary": "Add a single roster record.",
         "description": "Adds a record for a single piece of rolling stock using information provided in a JSON body.",
         "produces": [
@@ -252,6 +265,9 @@
     },
     "/roster/{id}": {
       "get": {
+        "tags": [
+          "Roster"
+        ],
         "summary": "Get a single roster record.",
         "description": "Returns the roster record identified by `id` for a single piece of rolling stock.",
         "produces": [
@@ -340,6 +356,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Roster"
+        ],
         "summary": "Update a single roster record.",
         "description": "Updates the roster record identified by `id` using information provided in a JSON body.",
         "produces": [
@@ -441,6 +460,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Roster"
+        ],
         "summary": "Delete a single roster item.",
         "description": "Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
         "produces": [
@@ -484,6 +506,9 @@
     },
     "/railroad/": {
       "get": {
+        "tags": [
+          "Railroads"
+        ],
         "summary": "Return the entire list of railroads.",
         "description": "Returns all reailroad entities in the collection. No filtering is applied.",
         "produces": [
@@ -522,6 +547,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Railroads"
+        ],
         "summary": "Add a single railroad entity.",
         "description": "Adds a record for a single railroad entity using information provided in a JSON body.",
         "produces": [
@@ -583,6 +611,9 @@
     },
     "/railroad/{id}": {
       "get": {
+        "tags": [
+          "Railroads"
+        ],
         "summary": "Get a single railroad entity.",
         "description": "Returns the railroad entity identified by `id`.",
         "produces": [
@@ -631,6 +662,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Railroads"
+        ],
         "summary": "Update a single railroad entity.",
         "description": "Updates the railroad entity identified by `id` using information provided in a JSON body.",
         "produces": [
@@ -682,6 +716,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Railroads"
+        ],
         "summary": "Delete a single railroad entity.",
         "description": "Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
         "produces": [

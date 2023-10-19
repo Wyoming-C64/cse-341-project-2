@@ -9,6 +9,7 @@ const getAll = async (req, res, next) => {
   /*
     #swagger.summary = 'Return the entire roster.'
     #swagger.description = 'Returns all roster records in the collection. No filtering is applied.'
+    #swagger.tags = ['Roster']
     #swagger.responses[200] = {
       description: "All roster records are successfully fetched and returned in an array.",
       schema: [{
@@ -53,6 +54,7 @@ const getAll = async (req, res, next) => {
 const getOne = async (req, res, next) => {
   /*  #swagger.summary = 'Get a single roster record.'
       #swagger.description = 'Returns the roster record identified by `id` for a single piece of rolling stock.'
+      #swagger.tags = ['Roster']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique ID for the roster record of a rolling stock item.',
@@ -119,6 +121,7 @@ const postData = async (req, res) => {
   console.log(`roster/POST document: `);
   /*  #swagger.summary = 'Add a single roster record.'
       #swagger.description = 'Adds a record for a single piece of rolling stock using information provided in a JSON body.'
+      #swagger.tags = ['Roster']
       #swagger.parameters['record'] = {
         in: 'body',
         description: 'A valid JSON object with required data elements populated.',
@@ -198,6 +201,7 @@ const putData = async (req, res, next) => {
   let response = {};
   /*  #swagger.summary = 'Update a single roster record.'
       #swagger.description = 'Updates the roster record identified by `id` using information provided in a JSON body.'
+      #swagger.tags = ['Roster']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique ID for the roster record of a rolling stock item.',
@@ -284,6 +288,7 @@ const putData = async (req, res, next) => {
 const deleteData = async (req, res, next) => {
   /*  #swagger.summary = 'Delete a single roster item.'
       #swagger.description = 'Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
+      #swagger.tags = ['Roster']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique ID for the rolling stock roster record to be deleted.',

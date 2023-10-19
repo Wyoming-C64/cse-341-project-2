@@ -4,6 +4,7 @@ const About = require('../about');
 const defaultRoute = async(req, res) => {
   /*  #swagger.summary = 'Return API name and version number.'
       #swagger.description = 'This endpoint simply returns an object containing the name of the API, version number, and author.'
+      #swagger.tags = ['Main']
       #swagger.responses[200] = { 
         description: "Returns the version information for the API.",
         schema: {

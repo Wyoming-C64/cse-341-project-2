@@ -2,12 +2,12 @@
 
 const routes = require('express').Router();
 
-const contactController = require('../controllers/rollingStock');
+const rollingStock = require('../controllers/rollingStock');
 
-routes.get('/', contactController.getAll);
-routes.get('/:id', contactController.getOne);
-routes.post('/', contactController.postData);
-routes.put('/:id', contactController.putData);
-routes.delete('/:id', contactController.deleteData);
+routes.get('/', rollingStock.getAll);
+routes.get('/:id', rollingStock.getOne);
+routes.post('/', rollingStock.postData);
+routes.put('/:id', rollingStock.putData);
+routes.delete('/:id', rollingStock.deleteData);
 
 module.exports = routes;

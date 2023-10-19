@@ -1,17 +1,14 @@
 // ROOT ROUTES
 
 const routes = require('express').Router();
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../swagger/swaggerDoc.json');
+const apiDocs = require('./apiDocs');
 
 const rootCtrl = require('../controllers');
 const rollingStock = require('./rollingStock');
 const railroads = require('./railroads');
 
 // API Documentation
-routes.use('/api-docs', swaggerUi.serve);
-routes.get('/api-docs', swaggerUi.setup(swaggerDocument));
-
+routes.use('/api-docs', apiDocs);
 
 // All other routes
 routes.get('/', rootCtrl.defaultRoute);
