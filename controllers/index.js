@@ -13,10 +13,20 @@ const defaultRoute = async(req, res) => {
           author: "Mike Lewis"
         } 
       }
+      #swagger.responses[500] = { 
+        description: "Internal server error.",
+      }
   */
-  console.log('/GET API VERSION:\n    200 - OK');
-  res.setHeader('Content-Type', 'application/json');  
-  res.status(200).json(About);
+  console.log('/GET API VERSION');
+  try {
+    res.setHeader('Content-Type', 'application/json');  
+    res.status(200).json(About);
+    console.log('    200 - OK');
+  } catch (err) {
+    res.setHeader('Content-Type', 'application/text');  
+    res.status(500).send('Internal server error.');
+    console.log(`    500 - ${err.name}: ${err.message}`);
+  }
 }
 
 module.exports = {
