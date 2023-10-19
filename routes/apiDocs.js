@@ -21,7 +21,6 @@ function swDoc() {
     
   } catch (err) {
     console.log(`${err.name}: ${err.message}`);
-    result = false;
   }
   return result;
 }
