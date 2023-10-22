@@ -15,7 +15,7 @@ const getAll = async (req, res, next) => {
       schema: [{
         _id: "0123456789abcdef01234567",
         reportingMark: 'TEST',
-        railroadName: 'Test Every Single Transportation Company',
+        railroadName: 'Test Every Single Track Company',
       }]
     }
     #swagger.responses[500] = {
@@ -28,7 +28,7 @@ const getAll = async (req, res, next) => {
       .db()
       .collection(collection)
       .find();
-
+    // twinkleMyToes();
     result.toArray()
       .then( (lists) => {
         console.log(`    200 - OK`);
@@ -38,6 +38,7 @@ const getAll = async (req, res, next) => {
   } catch (err) {
     console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
+    return false;
   }
 };
 
@@ -56,7 +57,7 @@ const getOne = async (req, res, next) => {
         schema: {
           _id: "0123456789abcdef01234567",
           reportingMark: 'TEST',
-          railroadName: 'Test Every Single Transportation Company',
+          railroadName: 'Test Every Single Track Company',
         }
       }
       #swagger.responses[400] = {
@@ -75,6 +76,7 @@ const getOne = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId); 
@@ -85,7 +87,7 @@ const getOne = async (req, res, next) => {
       .collection(collection)
       .findOne( {"_id": myObjId }
     );
-    
+    // twinkleMyToes();  
     if (result) {
       console.log(`    200 - OK`);
       res.setHeader('Content-Type', 'application/json');  
@@ -117,7 +119,7 @@ const postData = async (req, res) => {
         format: 'json',
         schema: {
           $reportingMark: "TEST",
-          $railroadName: "Test Every Single Transportation Company",
+          $railroadName: "Test Every Single Track Company",
         }
       }
       #swagger.responses[201] = {
@@ -127,41 +129,33 @@ const postData = async (req, res) => {
           insertedId: '<hexadecimal string>'
         }
       }
-      #swagger.responses[400] = {
-        description: 'Bad or missing data error.'
+      #swagger.responses[422] = {
+        description: 'Invalid or missing data error.'
       }
       #swagger.responses[500] = {
         description: 'Internal server or database error.'
       }
   */
   const record = req.body;
-  if ( 
-    record.reportingMark && 
-    record.railroadName
-  ) {
-    
+  try {
     const dbResult = mongoDb.getDb()
       .db()
       .collection(collection)
       .insertOne( record );
-
+    // twinkleMyToes();
     dbResult.then( 
       (resultData) => {
         console.log(`    201 - Created. New ID = ${resultData.insertedId}`); 
         res.setHeader('Content-Type', 'application/json'); 
         res.status(201).json(resultData); 
       }
-    )
-    .catch( (err) => {
-      console.log(`    500 - ${err.message}.`);
-      res.status(500).send('Internal server or database error.');
-    });
-
-  } else {
-    console.log(`    400 - Bad or missing data error.`);
-    res.status(400).send('Bad or missing data error.');
+    );
+  } catch (err) {
+    console.log(`    500 - ${err.message}.`);
+    res.status(500).send('Internal server or database error.');
+    return false;
   }
-    
+
 };
 
 /////// PUT ///////
@@ -183,7 +177,7 @@ const putData = async (req, res, next) => {
         format: 'json',
         schema: {
           $reportingMark: "TEST",
-          $railroadName: "Test Every Single Transportation Company"
+          $railroadName: "Test Every Single Track Company"
         }
       }
       #swagger.responses[204] = {
@@ -195,6 +189,9 @@ const putData = async (req, res, next) => {
       #swagger.responses[404] = {
         description: "Not found.",
       }
+      #swagger.responses[422] = {
+        description: "Invalid or missing data error.",
+      }
       #swagger.responses[500] = {
         description: "Internal server or database error.",
       }
@@ -205,6 +202,7 @@ const putData = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId); 
@@ -217,7 +215,8 @@ const putData = async (req, res, next) => {
     const dbResult = mongoDb.getDb()
       .db()
       .collection(collection)
-      .findOneAndUpdate( {"_id": myObjId }, {$set: req.body} );   
+      .findOneAndUpdate( {"_id": myObjId }, {$set: req.body} );
+    // twinkleMyToes();   
     dbResult.then( 
       (resultData) => {
         response = resultData.lastErrorObject.updatedExisting ? {
@@ -236,6 +235,7 @@ const putData = async (req, res, next) => {
     console.log(`    500 - ${err}`);
     res.setHeader('Content-Type', 'text/plain'); 
     res.status(500).send("Internal server or database error.");
+    return false;
   }
   
 };
@@ -272,6 +272,7 @@ const deleteData = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId);
@@ -282,7 +283,8 @@ const deleteData = async (req, res, next) => {
       .collection(collection)
       .deleteOne(
         {"_id": myObjId }
-    );   
+    );
+    // twinkleMyToes();
     dbResult.then( 
       (resultData) => {
         console.log(`    200 - Success - Documents deleted = ${resultData.deletedCount}`); 
@@ -293,6 +295,7 @@ const deleteData = async (req, res, next) => {
   } catch (err) {
     console.log(`    500 - ${err.message}`)
     res.status(500).send('Internal server or database error.');
+    return false;
   }
 }
 

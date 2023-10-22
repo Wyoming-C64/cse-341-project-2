@@ -5,10 +5,10 @@
     "title": "Railroad Roster REST API",
     "description": "Railroad Roster REST API v1.0.0 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
-  "host": "localhost:65100",
+  "host": "rr-roster.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -106,40 +106,40 @@
                     "example": "XM"
                   },
                   "carLength": {
-                    "type": "number",
-                    "example": 480
+                    "type": "string",
+                    "example": "480"
                   },
                   "carHeight": {
-                    "type": "number",
-                    "example": 186
+                    "type": "string",
+                    "example": "186"
                   },
                   "color": {
                     "type": "string",
                     "example": "Brown"
                   },
                   "ltWeight": {
-                    "type": "number",
-                    "example": 50000
+                    "type": "string",
+                    "example": "50000"
                   },
                   "ldLimit": {
-                    "type": "number",
-                    "example": 150000
+                    "type": "string",
+                    "example": "150000"
                   },
                   "capacity": {
-                    "type": "number",
-                    "example": 125000
+                    "type": "string",
+                    "example": "125000"
                   },
                   "units": {
                     "type": "string",
                     "example": "pounds"
                   },
                   "builtMonth": {
-                    "type": "number",
-                    "example": 1
+                    "type": "string",
+                    "example": "1"
                   },
                   "builtYear": {
-                    "type": "number",
-                    "example": 1988
+                    "type": "string",
+                    "example": "1988"
                   }
                 }
               },
@@ -184,40 +184,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "required": [
@@ -257,8 +257,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad or missing data error."
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -309,40 +309,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "xml": {
@@ -400,40 +400,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "required": [
@@ -462,6 +462,9 @@
           },
           "404": {
             "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -544,7 +547,7 @@
                   },
                   "railroadName": {
                     "type": "string",
-                    "example": "Test Every Single Transportation Company"
+                    "example": "Test Every Single Track Company"
                   }
                 }
               },
@@ -582,7 +585,7 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "required": [
@@ -612,8 +615,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad or missing data error."
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -657,7 +660,7 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "xml": {
@@ -708,7 +711,7 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "required": [
@@ -727,6 +730,9 @@
           },
           "404": {
             "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."

@@ -17,15 +17,15 @@ const getAll = async (req, res, next) => {
           reportingMark: "TEST",
           carNumber: "123456",
           aarCarType: "XM",
-          carLength: 480,
-          carHeight: 186,
+          carLength: "480",
+          carHeight: "186",
           color: "Brown",
-          ltWeight: 50000,
-          ldLimit: 150000,
-          capacity: 125000,
+          ltWeight: "50000",
+          ldLimit: "150000",
+          capacity: "125000",
           units: "pounds",
-          builtMonth: 1,
-          builtYear: 1988
+          builtMonth: "1",
+          builtYear: "1988"
         }]
     }
     #swagger.responses[500] = {
@@ -49,6 +49,7 @@ const getAll = async (req, res, next) => {
   } catch (err) {
     console.log(`    500 - ${err.message}`);
     res.status(500).send('Internal server or database error.');
+    return false;
   }
 };
 
@@ -69,15 +70,15 @@ const getOne = async (req, res, next) => {
           reportingMark: "TEST",
           carNumber: "123456",
           aarCarType: "XM",
-          carLength: 480,
-          carHeight: 186,
+          carLength: "480",
+          carHeight: "186",
           color: "Brown",
-          ltWeight: 50000,
-          ldLimit: 150000,
-          capacity: 125000,
+          ltWeight: "50000",
+          ldLimit: "150000",
+          capacity: "125000",
           units: "pounds",
-          builtMonth: 1,
-          builtYear: 1988
+          builtMonth: "1",
+          builtYear: "1988"
         }
       }
       #swagger.responses[400] = {
@@ -97,6 +98,7 @@ const getOne = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId);
@@ -106,7 +108,7 @@ const getOne = async (req, res, next) => {
       .db()
       .collection(collection)
       .findOne( {"_id": myObjId });
-  
+
     if (result) {
       console.log(`    200 - OK`);
       res.setHeader('Content-Type', 'application/json');  
@@ -140,15 +142,15 @@ const postData = async (req, res) => {
           $reportingMark: "TEST",
           $carNumber: "123456",
           $aarCarType: "XM",
-          $carLength: 480,
-          $carHeight: 186,
+          $carLength: "480",
+          $carHeight: "186",
           $color: "Brown",
-          $ltWeight: 50000,
-          $ldLimit: 150000,
-          $capacity: 125000,
+          $ltWeight: "50000",
+          $ldLimit: "150000",
+          $capacity: "125000",
           $units: "pounds",
-          $builtMonth: 1,
-          $builtYear: 1988
+          $builtMonth: "1",
+          $builtYear: "1988"
         }
       }
       #swagger.responses[201] = {
@@ -158,8 +160,8 @@ const postData = async (req, res) => {
           insertedId: '<hexadecimal string>'
         }
       }
-      #swagger.responses[400] = {
-        description: 'Bad or missing data error.'
+      #swagger.responses[422] = {
+        description: 'Invalid or missing data error.'
       }
       #swagger.responses[500] = {
         description: 'Internal server or database error.'
@@ -167,7 +169,7 @@ const postData = async (req, res) => {
   */
   const record = req.body;
   // Removed validation here and will put it in middleware with ValidatorJS.
-  // See Swagger documentation for response code 400.
+  // See Swagger documentation for response code 422.
 
   try {
     
@@ -186,6 +188,7 @@ const postData = async (req, res) => {
   } catch (err) {
     console.log(`    500 - ${err.message}.`);
     res.status(500).send('Internal server or database error.');
+    return false;
   }
     
 };
@@ -211,15 +214,15 @@ const putData = async (req, res, next) => {
           $reportingMark: "TEST",
           $carNumber: "123456",
           $aarCarType: "XM",
-          $carLength: 480,
-          $carHeight: 186,
+          $carLength: "480",
+          $carHeight: "186",
           $color: "Brown",
-          $ltWeight: 50000,
-          $ldLimit: 150000,
-          $capacity: 125000,
+          $ltWeight: "50000",
+          $ldLimit: "150000",
+          $capacity: "125000",
           $units: "pounds",
-          $builtMonth: 1,
-          $builtYear: 1988
+          $builtMonth: "1",
+          $builtYear: "1988"
         }
       }
       #swagger.responses[204] = {
@@ -231,6 +234,9 @@ const putData = async (req, res, next) => {
       #swagger.responses[404] = {
         description: "Not found.",
       }
+      #swagger.responses[422] = {
+        description: 'Invalid or missing data error.'
+      }
       #swagger.responses[500] = {
         description: "Internal server or database error.",
       }
@@ -241,24 +247,10 @@ const putData = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId);
-
-  // const record = {
-  //   reportingMark: req.body.reportingMark,
-  //   carNumber: req.body.carNumber,
-  //   aarCarType: req.body.aarCarType,
-  //   carLength: req.body.carLength,
-  //   carHeight: req.body.carHeight,
-  //   color: req.body.color,
-  //   ltWeight: req.body.ltWeight,
-  //   ldLimit: req.body.ldLimit,
-  //   capacity: req.body.capacity,
-  //   units: req.body.units,
-  //   builtMonth: req.body.builtMonth,
-  //   builtYear: req.body.builtYear
-  // }
 
   try {
     const dbResult = mongoDb.getDb()
@@ -283,6 +275,7 @@ const putData = async (req, res, next) => {
     console.log(`    500 - ${err}`);
     res.setHeader('Content-Type', 'text/plain'); 
     res.status(500).send("Internal server or database error.");
+    return false;
   }
 };
 
@@ -318,6 +311,7 @@ const deleteData = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
   
   const myObjId = new ObjectId(paddedId);
@@ -340,6 +334,7 @@ const deleteData = async (req, res, next) => {
     console.log(`    500 - ${err.message}`);
     res.setHeader('Content-Type', 'text/plain'); 
     res.status(500).send("Internal server or database error.");
+    return false;
   }
 };
 
