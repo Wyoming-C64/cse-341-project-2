@@ -244,7 +244,7 @@ const putData = async (req, res, next) => {
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
   /*  #swagger.summary = 'Delete a single railroad entity.'
-      #swagger.description = 'Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
+      #swagger.description = 'Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a railroad entity was actually deleted.'
       #swagger.tags = ['Railroads']
       #swagger.parameters['id'] = {
         in: 'path',
@@ -253,7 +253,7 @@ const deleteData = async (req, res, next) => {
         format: 'hex',
       } 
       #swagger.responses[200] = {
-        description: "The single railroad entity identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching roster records deleted.",
+        description: "The single railroad entity identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching records deleted.",
         schema: {
           acknowledged: true,
           deletedCount: 1
