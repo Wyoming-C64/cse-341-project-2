@@ -28,7 +28,7 @@ const getAll = async (req, res, next) => {
       .db()
       .collection(collection)
       .find();
-    // twinkleMyToes();
+    
     result.toArray()
       .then( (lists) => {
         console.log(`    200 - OK`);
@@ -87,7 +87,7 @@ const getOne = async (req, res, next) => {
       .collection(collection)
       .findOne( {"_id": myObjId }
     );
-    // twinkleMyToes();  
+      
     if (result) {
       console.log(`    200 - OK`);
       res.setHeader('Content-Type', 'application/json');  
@@ -142,7 +142,7 @@ const postData = async (req, res) => {
       .db()
       .collection(collection)
       .insertOne( record );
-    // twinkleMyToes();
+    
     dbResult.then( 
       (resultData) => {
         console.log(`    201 - Created. New ID = ${resultData.insertedId}`); 
@@ -216,7 +216,7 @@ const putData = async (req, res, next) => {
       .db()
       .collection(collection)
       .findOneAndUpdate( {"_id": myObjId }, {$set: req.body} );
-    // twinkleMyToes();   
+       
     dbResult.then( 
       (resultData) => {
         response = resultData.lastErrorObject.updatedExisting ? {
@@ -284,7 +284,7 @@ const deleteData = async (req, res, next) => {
       .deleteOne(
         {"_id": myObjId }
     );
-    // twinkleMyToes();
+    
     dbResult.then( 
       (resultData) => {
         console.log(`    200 - Success - Documents deleted = ${resultData.deletedCount}`); 
