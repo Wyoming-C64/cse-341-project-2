@@ -12,9 +12,17 @@ function swDoc() {
     #swagger.tags = ['API Documentation']
     #swagger.responses[200] = {
         description: "A functioning web page is returned allowing the user to navigate the documentation. No JSON data is returned on this route.",
-      }
+    }
   */
-   return swaggerUi.setup(swaggerDocument);
+  let result = null;
+  try {
+    result = swaggerUi.setup(swaggerDocument);
+    console.log('\nInitialized API documentation interface.');
+    
+  } catch (err) {
+    console.log(`${err.name}: ${err.message}`);
+  }
+  return result;
 }
 
 routes.use('/', swaggerUi.serve);

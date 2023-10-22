@@ -5,10 +5,10 @@
     "title": "Railroad Roster REST API",
     "description": "Railroad Roster REST API v1.0.0 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
-  "host": "localhost:65100",
+  "host": "rr-roster.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -50,6 +50,9 @@
                 "name": "main"
               }
             }
+          },
+          "500": {
+            "description": "Internal server error."
           }
         }
       }
@@ -103,40 +106,40 @@
                     "example": "XM"
                   },
                   "carLength": {
-                    "type": "number",
-                    "example": 480
+                    "type": "string",
+                    "example": "480"
                   },
                   "carHeight": {
-                    "type": "number",
-                    "example": 186
+                    "type": "string",
+                    "example": "186"
                   },
                   "color": {
                     "type": "string",
                     "example": "Brown"
                   },
                   "ltWeight": {
-                    "type": "number",
-                    "example": 50000
+                    "type": "string",
+                    "example": "50000"
                   },
                   "ldLimit": {
-                    "type": "number",
-                    "example": 150000
+                    "type": "string",
+                    "example": "150000"
                   },
                   "capacity": {
-                    "type": "number",
-                    "example": 125000
+                    "type": "string",
+                    "example": "125000"
                   },
                   "units": {
                     "type": "string",
                     "example": "pounds"
                   },
                   "builtMonth": {
-                    "type": "number",
-                    "example": 1
+                    "type": "string",
+                    "example": "1"
                   },
                   "builtYear": {
-                    "type": "number",
-                    "example": 1988
+                    "type": "string",
+                    "example": "1988"
                   }
                 }
               },
@@ -181,40 +184,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "required": [
@@ -254,8 +257,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad or missing data error."
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -279,8 +282,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the roster record of a rolling stock item.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a railroad rolling stock item.",
+            "format": "hex"
           }
         ],
         "responses": {
@@ -306,40 +309,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "xml": {
@@ -347,8 +350,11 @@
               }
             }
           },
+          "400": {
+            "description": "Invalid ID provided."
+          },
           "404": {
-            "description": "Not Found."
+            "description": "Not found."
           },
           "500": {
             "description": "Internal server or database error."
@@ -370,8 +376,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the roster record of a rolling stock item.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a railroad rolling stock item.",
+            "format": "hex"
           },
           {
             "name": "record",
@@ -394,40 +400,40 @@
                   "example": "XM"
                 },
                 "carLength": {
-                  "type": "number",
-                  "example": 480
+                  "type": "string",
+                  "example": "480"
                 },
                 "carHeight": {
-                  "type": "number",
-                  "example": 186
+                  "type": "string",
+                  "example": "186"
                 },
                 "color": {
                   "type": "string",
                   "example": "Brown"
                 },
                 "ltWeight": {
-                  "type": "number",
-                  "example": 50000
+                  "type": "string",
+                  "example": "50000"
                 },
                 "ldLimit": {
-                  "type": "number",
-                  "example": 150000
+                  "type": "string",
+                  "example": "150000"
                 },
                 "capacity": {
-                  "type": "number",
-                  "example": 125000
+                  "type": "string",
+                  "example": "125000"
                 },
                 "units": {
                   "type": "string",
                   "example": "pounds"
                 },
                 "builtMonth": {
-                  "type": "number",
-                  "example": 1
+                  "type": "string",
+                  "example": "1"
                 },
                 "builtYear": {
-                  "type": "number",
-                  "example": 1988
+                  "type": "string",
+                  "example": "1988"
                 }
               },
               "required": [
@@ -451,8 +457,14 @@
           "204": {
             "description": "Success - The roster record identified by `id` is updated with the new data. No data is returned other than this status."
           },
+          "400": {
+            "description": "Invalid ID provided."
+          },
           "404": {
             "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -474,8 +486,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the rolling stock roster record to be deleted.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a railroad rolling stock item.",
+            "format": "hex"
           }
         ],
         "responses": {
@@ -497,6 +509,9 @@
                 "name": "main"
               }
             }
+          },
+          "400": {
+            "description": "Invalid ID provided."
           },
           "500": {
             "description": "Internal server or database error."
@@ -532,7 +547,7 @@
                   },
                   "railroadName": {
                     "type": "string",
-                    "example": "Test Every Single Transportation Company"
+                    "example": "Test Every Single Track Company"
                   }
                 }
               },
@@ -570,7 +585,7 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "required": [
@@ -600,8 +615,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad or missing data error."
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -625,8 +640,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the railroad entity.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies the railroad entity.",
+            "format": "hex"
           }
         ],
         "responses": {
@@ -645,13 +660,16 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "xml": {
                 "name": "main"
               }
             }
+          },
+          "400": {
+            "description": "Invalid ID provided."
           },
           "404": {
             "description": "Not Found."
@@ -676,8 +694,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the railroad entity.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies the railroad entity.",
+            "format": "hex"
           },
           {
             "name": "record",
@@ -693,7 +711,7 @@
                 },
                 "railroadName": {
                   "type": "string",
-                  "example": "Test Every Single Transportation Company"
+                  "example": "Test Every Single Track Company"
                 }
               },
               "required": [
@@ -707,8 +725,14 @@
           "204": {
             "description": "Success - The single railroad entity identified by `id` is updated with the new data. No data is returned other than this status."
           },
+          "400": {
+            "description": "Invalid ID provided."
+          },
           "404": {
             "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
@@ -730,8 +754,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "A valid and unique ID for the railroad entity to be deleted.",
-            "format": "hexadecimal"
+            "description": "A valid and unique 24-digit hexadecimal string that identifies the railroad entity.",
+            "format": "hex"
           }
         ],
         "responses": {
@@ -753,6 +777,9 @@
                 "name": "main"
               }
             }
+          },
+          "400": {
+            "description": "Invalid ID provided."
           },
           "500": {
             "description": "Internal server or database error."
