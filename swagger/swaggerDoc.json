@@ -125,8 +125,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden - (Must be logged in... Although, it would seem that the backend will redirect to the login page, so this may never actually show.)"
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
           },
           "500": {
             "description": "Internal server error."
@@ -319,6 +319,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
           },
           "422": {
             "description": "Invalid or missing data error."
@@ -523,6 +526,9 @@
           "400": {
             "description": "Invalid ID provided."
           },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
+          },
           "404": {
             "description": "Not found."
           },
@@ -575,6 +581,9 @@
           },
           "400": {
             "description": "Invalid ID provided."
+          },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
           },
           "500": {
             "description": "Internal server or database error."
@@ -677,6 +686,9 @@
                 "name": "main"
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
           },
           "422": {
             "description": "Invalid or missing data error."
@@ -791,6 +803,9 @@
           "400": {
             "description": "Invalid ID provided."
           },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
+          },
           "404": {
             "description": "Not found."
           },
@@ -843,6 +858,9 @@
           },
           "400": {
             "description": "Invalid ID provided."
+          },
+          "401": {
+            "description": "Unauthorized - Must be an authorized user."
           },
           "500": {
             "description": "Internal server or database error."

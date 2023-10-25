@@ -18,8 +18,8 @@ const getProfile = async(req, res) => {
           sub: "<string>"
         }
       }
-      #swagger.responses[403] = { 
-        description: "Forbidden - (Must be logged in... Although, it would seem that the backend will redirect to the login page, so this may never actually show.)",
+      #swagger.responses[401] = { 
+        description: "Unauthorized - Must be an authorized user.",
       }
       #swagger.responses[500] = { 
         description: "Internal server error.",
