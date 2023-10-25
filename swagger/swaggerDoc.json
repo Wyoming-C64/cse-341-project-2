@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.2",
     "title": "Railroad Roster REST API",
-    "description": "Railroad Roster REST API v1.0.0 by Mike Lewis for BYU-I CSE-341: Web Services"
+    "description": "Railroad Roster REST API v1.0.2 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
-  "host": "rr-roster.onrender.com",
+  "host": "localhost:65100",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
