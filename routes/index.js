@@ -2,13 +2,14 @@
 
 const routes = require('express').Router();
 
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 
 const apiDocs = require('./apiDocs');
 
 const rootCtrl = require('../controllers');
 const rollingStock = require('./rollingStock');
 const railroads = require('./railroads');
+const profile = require('./profile');
 
 const config = {
     authRequired: false,
@@ -31,6 +32,9 @@ routes.get('/', (req, res) => {
 
 // API Documentation
 routes.use('/api-docs', apiDocs);
+
+// User Profile
+routes.use('/profile', profile);
 
 // All other routes
 routes.get('/', rootCtrl.defaultRoute);

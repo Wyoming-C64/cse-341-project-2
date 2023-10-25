@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "title": "Railroad Roster REST API",
-    "description": "Railroad Roster REST API v1.0.2 by Mike Lewis for BYU-I CSE-341: Web Services"
+    "description": "Railroad Roster REST API v1.0.3 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
   "host": "localhost:65100",
   "basePath": "/",
@@ -67,6 +67,69 @@
         "responses": {
           "200": {
             "description": "A functioning web page is returned allowing the user to navigate the documentation. No JSON data is returned on this route."
+          }
+        }
+      }
+    },
+    "/profile/": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Return profile data for the logged in user.",
+        "description": "This endpoint simply returns an object containing all of the pertinent information of the logged in user.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the user information for the currently logged in user. The example below represents the minimum data returned for a basic user. More information may be provided depending on the authorization method used.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sid": {
+                  "type": "string",
+                  "example": "<string>"
+                },
+                "nickname": {
+                  "type": "string",
+                  "example": "someUser"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Some User Fullname"
+                },
+                "picture": {
+                  "type": "string",
+                  "example": "<url>"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "example": "2023-10-25T06:18:15,350Z"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "validemail@domain.com"
+                },
+                "email_verified": {
+                  "type": "string",
+                  "example": "< true | false >"
+                },
+                "sub": {
+                  "type": "string",
+                  "example": "<string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - (Must be logged in... Although, it would seem that the backend will redirect to the login page, so this may never actually show.)"
+          },
+          "500": {
+            "description": "Internal server error."
           }
         }
       }
