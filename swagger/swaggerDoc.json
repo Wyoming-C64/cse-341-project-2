@@ -5,10 +5,10 @@
     "title": "Railroad Roster REST API",
     "description": "Railroad Roster REST API v1.0.3 by Mike Lewis for BYU-I CSE-341: Web Services"
   },
-  "host": "localhost:65100",
+  "host": "rr-roster.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
