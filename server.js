@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const app = express();
 
-const Port = process.env.Port || 65100;  // If no defined environment port, listen on 65100.
+const Port = process.env.PORT || 65100;  // If no defined environment port, listen on 65100.
 
 // I'm told to make sure this is placed before I handle any routes.
 app.use(bodyParser.urlencoded({ extended: true }))

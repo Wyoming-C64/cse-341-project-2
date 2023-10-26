@@ -160,6 +160,9 @@ const postData = async (req, res) => {
           insertedId: '<hexadecimal string>'
         }
       }
+      #swagger.responses[401] = { 
+        description: "Unauthorized - Must be an authorized user.",
+      }
       #swagger.responses[422] = {
         description: 'Invalid or missing data error.'
       }
@@ -231,6 +234,9 @@ const putData = async (req, res, next) => {
       #swagger.responses[400] = {
         description: "Invalid ID provided.",
       }
+      #swagger.responses[401] = { 
+        description: "Unauthorized - Must be an authorized user.",
+      }
       #swagger.responses[404] = {
         description: "Not found.",
       }
@@ -301,6 +307,9 @@ const deleteData = async (req, res, next) => {
       }
       #swagger.responses[400] = {
         description: "Invalid ID provided.",
+      }
+      #swagger.responses[401] = { 
+        description: "Unauthorized - Must be an authorized user.",
       }
       #swagger.responses[500] = {
         description: 'Internal server or database error.'
