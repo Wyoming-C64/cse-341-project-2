@@ -1,7 +1,7 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
+  "name": "Railroad Roster API",
+  "version": "1.0.3",
+  "description": "A backend API to keep track of my model trains.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: No test specified.\" && exit 1",
