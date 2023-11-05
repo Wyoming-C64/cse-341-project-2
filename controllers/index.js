@@ -20,6 +20,7 @@ const statusRoute = async(req, res) => {
     let theStatus = {
       "loggedIn": req.oidc.isAuthenticated()
     };
+    console.log(`    200 - OK`);
     res.status(200).json(theStatus);
   } catch (err) {
     console.log(`    500 - ${err.message}`);
