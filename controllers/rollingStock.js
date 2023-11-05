@@ -131,7 +131,7 @@ const getOne = async (req, res, next) => {
 const postData = async (req, res) => {
   console.log(`roster/POST document: `);
   /*  #swagger.summary = 'Add a single roster record.'
-      #swagger.description = 'Adds a record for a single piece of rolling stock using information provided in a JSON body.'
+      #swagger.description = '<b>Must be authorized to use.</b> Adds a record for a single piece of rolling stock using information provided in a JSON body.'
       #swagger.tags = ['Roster']
       #swagger.parameters['record'] = {
         in: 'body',
@@ -200,7 +200,7 @@ const postData = async (req, res) => {
 const putData = async (req, res, next) => {
   let response = {};
   /*  #swagger.summary = 'Update a single roster record.'
-      #swagger.description = 'Updates the roster record identified by `id` using information provided in a JSON body.'
+      #swagger.description = '<b>Must be authorized to use.</b> Updates the roster record identified by `id` using information provided in a JSON body.'
       #swagger.tags = ['Roster']
       #swagger.parameters['id'] = {
         in: 'path',
@@ -290,7 +290,7 @@ const putData = async (req, res, next) => {
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
   /*  #swagger.summary = 'Delete a single roster item.'
-      #swagger.description = 'Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
+      #swagger.description = '<b>Must be authorized to use.</b> Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.'
       #swagger.tags = ['Roster']
       #swagger.parameters['id'] = {
         in: 'path',

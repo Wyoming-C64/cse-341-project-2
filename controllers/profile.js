@@ -3,7 +3,7 @@
 const getProfile = async(req, res) => {
   console.log('profile/GET');
   /*  #swagger.summary = 'Return profile data for the logged in user.'
-      #swagger.description = 'This endpoint simply returns an object containing all of the pertinent information of the logged in user.'
+      #swagger.description = '<b>Must be authenticated to use.</b> This endpoint simply returns an object containing all of the pertinent information of the logged in user.'
       #swagger.tags = ['Profile']
       #swagger.responses[200] = { 
         description: "Returns the user information for the currently logged in user. The example below represents the minimum data returned for a basic user. More information may be provided depending on the authorization method used.",

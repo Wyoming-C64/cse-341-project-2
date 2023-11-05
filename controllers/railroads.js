@@ -110,7 +110,7 @@ const getOne = async (req, res, next) => {
 const postData = async (req, res) => {
   console.log(`railroads/POST document: `);
   /*  #swagger.summary = 'Add a single railroad entity.'
-      #swagger.description = 'Adds a record for a single railroad entity using information provided in a JSON body.'
+      #swagger.description = '<b>Must be authorized to use.</b> Adds a record for a single railroad entity using information provided in a JSON body.'
       #swagger.tags = ['Railroads']
       #swagger.parameters['record'] = {
         in: 'body',
@@ -165,7 +165,7 @@ const postData = async (req, res) => {
 const putData = async (req, res, next) => {
   let response = {};
   /*  #swagger.summary = 'Update a single railroad entity.'
-      #swagger.description = 'Updates the railroad entity identified by `id` using information provided in a JSON body.'
+      #swagger.description = '<b>Must be authorized to use.</b> Updates the railroad entity identified by `id` using information provided in a JSON body.'
       #swagger.tags = ['Railroads']
       #swagger.parameters['id'] = {
         in: 'path',
@@ -250,7 +250,7 @@ const putData = async (req, res, next) => {
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
   /*  #swagger.summary = 'Delete a single railroad entity.'
-      #swagger.description = 'Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a railroad entity was actually deleted.'
+      #swagger.description = '<b>Must be authorized to use.</b> Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a railroad entity was actually deleted.'
       #swagger.tags = ['Railroads']
       #swagger.parameters['id'] = {
         in: 'path',

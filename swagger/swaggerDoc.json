@@ -57,6 +57,38 @@
         }
       }
     },
+    "/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Provide status of whether user is logged in or out.",
+        "description": "This endpoint simply returns a string indicating if a user is logged in or out.",
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns whether a user is logged in or out.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "loggedIn": {
+                  "type": "string",
+                  "example": "<true | false>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
     "/api-docs/": {
       "get": {
         "tags": [
@@ -77,7 +109,7 @@
           "Profile"
         ],
         "summary": "Return profile data for the logged in user.",
-        "description": "This endpoint simply returns an object containing all of the pertinent information of the logged in user.",
+        "description": "<b>Must be authenticated to use.</b> This endpoint simply returns an object containing all of the pertinent information of the logged in user.",
         "produces": [
           "application/json"
         ],
@@ -221,7 +253,7 @@
           "Roster"
         ],
         "summary": "Add a single roster record.",
-        "description": "Adds a record for a single piece of rolling stock using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a record for a single piece of rolling stock using information provided in a JSON body.",
         "produces": [
           "application/json"
         ],
@@ -432,7 +464,7 @@
           "Roster"
         ],
         "summary": "Update a single roster record.",
-        "description": "Updates the roster record identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the roster record identified by `id` using information provided in a JSON body.",
         "produces": [
           "text/plain"
         ],
@@ -545,7 +577,7 @@
           "Roster"
         ],
         "summary": "Delete a single roster item.",
-        "description": "Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a roster record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a roster record was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -638,7 +670,7 @@
           "Railroads"
         ],
         "summary": "Add a single railroad entity.",
-        "description": "Adds a record for a single railroad entity using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a record for a single railroad entity using information provided in a JSON body.",
         "produces": [
           "application/json"
         ],
@@ -759,7 +791,7 @@
           "Railroads"
         ],
         "summary": "Update a single railroad entity.",
-        "description": "Updates the railroad entity identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the railroad entity identified by `id` using information provided in a JSON body.",
         "produces": [
           "text/plain"
         ],
@@ -822,7 +854,7 @@
           "Railroads"
         ],
         "summary": "Delete a single railroad entity.",
-        "description": "Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a railroad entity was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a railroad entity identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a railroad entity was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -873,7 +905,7 @@
     "securityDefinitions": {
       "OAuth2": {
         "type": "oauth2",
-        "description": "This API uses OAuth 2 with the authorization code flow.",
+        "description": "This API uses OAuth 2.0 with the authorization code flow.",
         "flow": "accessCode",
         "authorizationUrl": "https://rr-roster.onrender.com/login/",
         "tokenUrl": "https://rr-roster.onrender.com/oauth/token",
