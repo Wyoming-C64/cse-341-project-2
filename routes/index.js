@@ -25,11 +25,6 @@ const config = {
 routes.use(auth(config));
 console.log('OpenID Connect initialized.');
 
-// req.isAuthenticated is provided from the auth router
-routes.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
-
 // API Documentation
 routes.use('/api-docs', apiDocs);
 
@@ -40,5 +35,8 @@ routes.use('/profile', profile);
 routes.get('/', rootCtrl.defaultRoute);
 routes.use('/roster', rollingStock);
 routes.use('/railroad', railroads)
+
+// req.isAuthenticated is provided from the auth router
+routes.get('/status', rootCtrl.statusRoute);
 
 module.exports = routes;

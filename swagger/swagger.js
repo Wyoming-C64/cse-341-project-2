@@ -13,6 +13,23 @@ const doc = {
   consumes: ['application/json'], 
   produces: ['application/json'], 
   tags: [],
+
+  components: {
+    securityDefinitions: {
+      OAuth2: {
+        type: "oauth2",
+        description: "This API uses OAuth 2.0 with the authorization code flow.",
+        flow: "accessCode",
+        authorizationUrl: 'https://rr-roster.onrender.com/login/',
+        tokenUrl: 'https://rr-roster.onrender.com/oauth/token',
+        scopes: {
+          read: 'Grants read access',
+          write: 'Grants write access',
+          admin: 'Grants read and write access to administrative information'
+        }
+      }
+    }
+  }
 };
 
 const outputFile = './swagger/swaggerDoc.json';
