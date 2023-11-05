@@ -63,7 +63,7 @@
           "Status"
         ],
         "summary": "Provide status of whether user is logged in or out.",
-        "description": "This endpoint simply returns a string indicating if a user is logged in or out.",
+        "description": "This endpoint simply returns a single boolean field indicating if a user is logged in or out.",
         "produces": [
           "text/plain"
         ],

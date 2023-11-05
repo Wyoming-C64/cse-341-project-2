@@ -3,7 +3,7 @@ const About = require('../about');
 
 const statusRoute = async(req, res) => {
     /*  #swagger.summary = 'Provide status of whether user is logged in or out.'
-        #swagger.description = 'This endpoint simply returns a string indicating if a user is logged in or out.'
+        #swagger.description = 'This endpoint simply returns a single boolean field indicating if a user is logged in or out.'
         #swagger.tags = ['Status']
         #swagger.responses[200] = { 
           description: "Returns whether a user is logged in or out.",
